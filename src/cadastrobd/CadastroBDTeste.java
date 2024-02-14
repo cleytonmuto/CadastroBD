@@ -42,7 +42,11 @@ public class CadastroBDTeste {
             pf.setEstado("RJ");
             pfDao.alterar(pf);
             ArrayList<PessoaFisica> listaPf = pfDao.getPessoas();
-            listaPf.forEach(pessoa -> System.out.println(pessoa.getNome()));
+            for (PessoaFisica pessoa : listaPf) {
+                System.out.println("---------------------------------");
+                pessoa.exibir();
+            }
+            System.out.println("---------------------------------");
             pfDao.excluir(pf);
             pfDao.close();
         }
@@ -64,7 +68,11 @@ public class CadastroBDTeste {
             pj.setEstado("MG");
             pjDao.alterar(pj);
             ArrayList<PessoaJuridica> listaPj = pjDao.getPessoas();
-            listaPj.forEach(empresa -> System.out.println(empresa.getNome()));
+            for (PessoaJuridica pessoa : listaPj) {
+                System.out.println("---------------------------------");
+                pessoa.exibir();
+            }
+            System.out.println("---------------------------------");
             pjDao.excluir(pj);
             pjDao.close();
         }

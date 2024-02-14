@@ -22,22 +22,22 @@ public class PessoaFisicaDAO {
 
     public PessoaFisica getPessoa(Integer id) throws SQLException {
         String sql = "SELECT pf.FK_Pessoa_idPessoa, pf.cpf, p.nome, p.endereco, p.cidade, p.estado, p.telefone, p.email "
-                + "FROM PessoaFisica pf "
-                + "INNER JOIN Pessoa p ON pf.FK_Pessoa_idPessoa = p.idPessoa "
-                + "WHERE pf.FK_Pessoa_idPessoa = ?";
+            + "FROM PessoaFisica pf "
+            + "INNER JOIN Pessoa p ON pf.FK_Pessoa_idPessoa = p.idPessoa "
+            + "WHERE pf.FK_Pessoa_idPessoa = ?";
         try (Connection con = connector.getConnection(); PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new PessoaFisica(
-                            rs.getInt("FK_Pessoa_idPessoa"),
-                            rs.getString("nome"),
-                            rs.getString("endereco"),
-                            rs.getString("cidade"),
-                            rs.getString("estado"),
-                            rs.getString("telefone"),
-                            rs.getString("email"),
-                            rs.getString("cpf")
+                        rs.getInt("FK_Pessoa_idPessoa"),
+                        rs.getString("nome"),
+                        rs.getString("endereco"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getString("telefone"),
+                        rs.getString("email"),
+                        rs.getString("cpf")
                     );
                 }
             }
@@ -50,17 +50,18 @@ public class PessoaFisicaDAO {
         String sql = "SELECT pf.FK_Pessoa_idPessoa, pf.cpf, p.nome, p.endereco, p.cidade, p.estado, p.telefone, p.email "
                 + "FROM PessoaFisica pf "
                 + "INNER JOIN Pessoa p ON pf.FK_Pessoa_idPessoa = p.idPessoa";
-        try (Connection con = connector.getConnection(); PreparedStatement stmt = con.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection con = connector.getConnection(); PreparedStatement stmt =
+            con.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 list.add(new PessoaFisica(
-                        rs.getInt("FK_Pessoa_idPessoa"),
-                        rs.getString("nome"),
-                        rs.getString("endereco"),
-                        rs.getString("cidade"),
-                        rs.getString("estado"),
-                        rs.getString("telefone"),
-                        rs.getString("email"),
-                        rs.getString("cpf")));
+                    rs.getInt("FK_Pessoa_idPessoa"),
+                    rs.getString("nome"),
+                    rs.getString("endereco"),
+                    rs.getString("cidade"),
+                    rs.getString("estado"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("cpf")));
             }
         }
         return list;
@@ -72,22 +73,17 @@ public class PessoaFisicaDAO {
         }
         String sqlInsertPessoa = "INSERT INTO Pessoa(nome, endereco, cidade, estado, telefone, email) VALUES(?, ?, ?, ?, ?, ?)";
         String sqlInsertPessoaFisica = "INSERT INTO PessoaFisica(FK_Pessoa_idPessoa, cpf) VALUES(?, ?)";
-
-        try (Connection con = connector.getConnection(); PreparedStatement stmtPessoa = con.prepareStatement(sqlInsertPessoa, Statement.RETURN_GENERATED_KEYS)) {
-            stmtPessoa.setString(1, pf.getNome());
-            stmtPessoa.setString(2, pf.getEndereco());
-            stmtPessoa.setString(3, pf.getCidade());
-            stmtPessoa.setString(4, pf.getEstado());
-            stmtPessoa.setString(5, pf.getTelefone());
-            stmtPessoa.setString(6, pf.getEmail());
-
+        try (Connection con = connector.getConnection(); PreparedStatement stmtPessoa =
+            con.prepareStatement(sqlInsertPessoa, Statement.RETURN_GENERATED_KEYS)) {
+            String[] pfArray = {"", pf.getNome(), pf.getEndereco(), pf.getCidade(), pf.getEstado(), pf.getTelefone(), pf.getEmail()};
+            for(int i = 1; i < 7; i++) {
+                stmtPessoa.setString(i, pfArray[i]);
+            }
             if (stmtPessoa.executeUpdate() != 0) {
                 System.out.println("INSERT INTO PessoaFisica success.");
-            }
-            else {
+            } else {
                 throw new SQLException("Creating user failed, no rows affected.");
             }
-
             try (ResultSet generatedKeys = stmtPessoa.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int idNovaPessoa = generatedKeys.getInt(1);
@@ -108,13 +104,13 @@ public class PessoaFisicaDAO {
     public void alterar(PessoaFisica pf) throws SQLException {
         String sqlUpdatePessoa = "UPDATE Pessoa SET nome = ?, endereco = ?, cidade = ?, estado = ?, telefone = ?, email = ? WHERE idPessoa = ?;";
         String sqlUpdatePessoaFisica = "UPDATE PessoaFisica SET cpf = ? WHERE FK_Pessoa_idPessoa = ?;";
-        try (Connection con = connector.getConnection(); PreparedStatement stmtPessoa = con.prepareStatement(sqlUpdatePessoa); PreparedStatement stmtPessoaFisica = con.prepareStatement(sqlUpdatePessoaFisica)) {
-            stmtPessoa.setString(1, pf.getNome());
-            stmtPessoa.setString(2, pf.getEndereco());
-            stmtPessoa.setString(3, pf.getCidade());
-            stmtPessoa.setString(4, pf.getEstado());
-            stmtPessoa.setString(5, pf.getTelefone());
-            stmtPessoa.setString(6, pf.getEmail());
+        try (Connection con = connector.getConnection();
+            PreparedStatement stmtPessoa = con.prepareStatement(sqlUpdatePessoa);
+            PreparedStatement stmtPessoaFisica = con.prepareStatement(sqlUpdatePessoaFisica)) {
+            String[] pfArray = {"", pf.getNome(), pf.getEndereco(), pf.getCidade(), pf.getEstado(), pf.getTelefone(), pf.getEmail()};
+            for(int i = 1; i < 7; i++) {
+                stmtPessoa.setString(i, pfArray[i]);
+            }
             stmtPessoa.setInt(7, pf.getId());
             stmtPessoa.executeUpdate();
             stmtPessoaFisica.setString(1, pf.getCpf());

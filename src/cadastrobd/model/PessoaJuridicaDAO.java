@@ -78,20 +78,16 @@ public class PessoaJuridicaDAO {
 
         try (Connection con = connector.getConnection();
             PreparedStatement stmtPessoa = con.prepareStatement(sqlInsertPessoa,Statement.RETURN_GENERATED_KEYS)) {
-            stmtPessoa.setString(1, pj.getNome());
-            stmtPessoa.setString(2, pj.getEndereco());
-            stmtPessoa.setString(3, pj.getCidade());
-            stmtPessoa.setString(4, pj.getEstado());
-            stmtPessoa.setString(5, pj.getTelefone());
-            stmtPessoa.setString(6, pj.getEmail());
-            
+            String[] pfArray = {"", pj.getNome(), pj.getEndereco(), pj.getCidade(), pj.getEstado(), pj.getTelefone(), pj.getEmail()};
+            for(int i = 1; i < 7; i++) {
+                stmtPessoa.setString(i, pfArray[i]);
+            }
             if (stmtPessoa.executeUpdate() != 0) {
                 System.out.println("INSERT INTO PessoaJuridica success.");
             }
             else {
                 throw new SQLException("Creating user failed, no rows affected.");
             }
-
             try (ResultSet generatedKeys = stmtPessoa.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int idNovaPessoa = generatedKeys.getInt(1);
@@ -113,14 +109,12 @@ public class PessoaJuridicaDAO {
         String sqlUpdatePessoa = "UPDATE Pessoa SET nome = ?, endereco = ?, cidade = ?, estado = ?, telefone = ?, email = ? WHERE idPessoa = ?;";
         String sqlUpdatePessoaJuridica = "UPDATE PessoaJuridica SET cnpj = ? WHERE FK_Pessoa_idPessoa = ?;";
         try (Connection con = connector.getConnection();
-             PreparedStatement stmtPessoa = con.prepareStatement(sqlUpdatePessoa,Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement stmtPessoaJuridica = con.prepareStatement(sqlUpdatePessoaJuridica,Statement.RETURN_GENERATED_KEYS)) {
-            stmtPessoa.setString(1, pj.getNome());
-            stmtPessoa.setString(2, pj.getEndereco());
-            stmtPessoa.setString(3, pj.getCidade());
-            stmtPessoa.setString(4, pj.getEstado());
-            stmtPessoa.setString(5, pj.getTelefone());
-            stmtPessoa.setString(6, pj.getEmail());
+            PreparedStatement stmtPessoa = con.prepareStatement(sqlUpdatePessoa,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmtPessoaJuridica = con.prepareStatement(sqlUpdatePessoaJuridica,Statement.RETURN_GENERATED_KEYS)) {
+            String[] pfArray = {"", pj.getNome(), pj.getEndereco(), pj.getCidade(), pj.getEstado(), pj.getTelefone(), pj.getEmail()};
+            for(int i = 1; i < 7; i++) {
+                stmtPessoa.setString(i, pfArray[i]);
+            }
             stmtPessoa.setInt(7, pj.getId());
             stmtPessoa.executeUpdate();
             stmtPessoaJuridica.setString(1, pj.getCnpj());
