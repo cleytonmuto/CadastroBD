@@ -10,15 +10,17 @@
 ---
 
 As credenciais do banco devem ser informadas no arquivo
-resouces/credentials.xml com o seguinte formato:
+resources/credentials.xml com o seguinte formato:
 
-resources/
+
+```
 <?xml version="1.0"?>
 <credentials>
-    <user id="1001">
-		<hostname></hostname>
-		<dbname></dbname>
-        <login></login>
-        <password></password>
-    </user>
+  <user id="1001">
+    <hostname></hostname>
+    <dbname></dbname>
+    <login></login>
+    <password></password>
+  </user>
 </credentials>
+```
