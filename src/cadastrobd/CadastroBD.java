@@ -47,6 +47,17 @@ public class CadastroBD {
         return intValue;
     }
     
+    private void printMenu() {
+        System.out.println("\n==============================");
+        System.out.println("1 - Incluir");
+        System.out.println("2 - Alterar");
+        System.out.println("3 - Excluir");
+        System.out.println("4 - Buscar pelo ID");
+        System.out.println("5 - Exibir todos");
+        System.out.println("0 - Sair");
+        System.out.println("==============================");
+    }
+    
     public void run() {
         String opcao = "";
         while (!opcao.equals("0")) {
@@ -235,17 +246,6 @@ public class CadastroBD {
         }
     }
     
-    private void printMenu() {
-        System.out.println("\n==============================");
-        System.out.println("1 - Incluir");
-        System.out.println("2 - Alterar");
-        System.out.println("3 - Excluir");
-        System.out.println("4 - Buscar pelo ID");
-        System.out.println("5 - Exibir todos");
-        System.out.println("0 - Sair");
-        System.out.println("==============================");
-    }
-
     /**
      * @param args the command line arguments
      */

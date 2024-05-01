@@ -20,8 +20,7 @@ public class PessoaFisica extends Pessoa {
     
     @Override
     public void exibir() {
-        super.exibir();
-        System.out.println("CPF: ".concat(cpf));
+        System.out.println(this);
     }
 
     public String getCpf() {
@@ -30,6 +29,13 @@ public class PessoaFisica extends Pessoa {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    
+    @Override
+    public String toString() {
+        String output = super.toString();
+        output = output.concat("\nCPF: ".concat(cpf));
+        return output;
     }
     
 }

@@ -16,6 +16,7 @@ public class ConectorBD {
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
+    private CredentialsLoader loader;
     
     private final String HOSTNAME;
     private final String DBNAME;
@@ -23,7 +24,7 @@ public class ConectorBD {
     private final String PASSWORD;
     
     public ConectorBD() {
-        CredentialsLoader loader = new CredentialsLoader();
+        loader = new CredentialsLoader();
         HOSTNAME = loader.getHostname();
         DBNAME = loader.getDbname();
         LOGIN = loader.getLogin();

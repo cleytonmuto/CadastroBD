@@ -20,8 +20,7 @@ public class PessoaJuridica extends Pessoa {
 
     @Override
     public void exibir() {
-        super.exibir();
-        System.out.println("CNPJ: ".concat(cnpj));
+        System.out.println(this);
     }
 
     public String getCnpj() {
@@ -30,6 +29,13 @@ public class PessoaJuridica extends Pessoa {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+    
+    @Override
+    public String toString() {
+        String output = super.toString();
+        output = output.concat("\nCNPJ: ".concat(cnpj));
+        return output;
     }
     
 }
