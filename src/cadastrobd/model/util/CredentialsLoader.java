@@ -27,8 +27,8 @@ import java.util.NoSuchElementException;
  */
 public class CredentialsLoader {
 
-    private static final String FILENAME = "resources/credentials.xml";
     private static final Logger LOGGER = Logger.getLogger(CredentialsLoader.class.getName());
+    private final String FILENAME = "resources/credentials.xml";
     
     private String hostname;
     private String dbname;

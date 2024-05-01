@@ -18,7 +18,8 @@ public class Pessoa {
         
     }
 
-    public Pessoa(Integer id, String nome, String endereco, String cidade, String estado, String telefone, String email) {
+    public Pessoa(Integer id, String nome, String endereco, String cidade,
+        String estado, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -29,13 +30,7 @@ public class Pessoa {
     }
 
     public void exibir() {
-        System.out.println("id: ".concat(id.toString()));
-        System.out.println("nome: ".concat(nome));
-        System.out.println("endereco: ".concat(endereco));
-        System.out.println("cidade: ".concat(cidade));
-        System.out.println("estado: ".concat(estado));
-        System.out.println("telefone: ".concat(telefone));
-        System.out.println("email: ".concat(email));
+        System.out.println(this);
     }
 
     public Integer getId() {
@@ -92,5 +87,17 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    @Override
+    public String toString() {
+        String output = "id: ".concat(id.toString());
+        output = output.concat("\nnome: ".concat(nome));
+        output = output.concat("\nendereco: ".concat(endereco));
+        output = output.concat("\ncidade: ".concat(cidade));
+        output = output.concat("\nestado: ".concat(estado));
+        output = output.concat("\ntelefone: ".concat(telefone));
+        output = output.concat("\nemail: ".concat(email));
+        return output;
     }
 }

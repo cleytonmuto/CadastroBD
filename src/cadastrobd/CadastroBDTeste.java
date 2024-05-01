@@ -37,17 +37,27 @@ public class CadastroBDTeste {
         }
         
         try {
+            System.out.println("---------------------------------");
             System.out.println("Pessoa Fisica incluida com ID: " + pfDao.incluir(pf));
+            System.out.println("---------------------------------");
+            pf.exibir();
             pf.setCidade("Rio de Janeiro");
             pf.setEstado("RJ");
             pfDao.alterar(pf);
+            System.out.println("---------------------------------");
+            System.out.println("Pessoa Fisica alterada.");
+            pf.exibir();
             ArrayList<PessoaFisica> listaPf = pfDao.getPessoas();
+            System.out.println("---------------------------------");
+            System.out.println("Exibir todas as pessoas fisicas:");
             for (PessoaFisica pessoa : listaPf) {
                 System.out.println("---------------------------------");
                 pessoa.exibir();
             }
             System.out.println("---------------------------------");
             pfDao.excluir(pf);
+            System.out.println("---------------------------------");
+            System.out.println("Pessoa Fisica excluida.");
             pfDao.close();
         }
         catch (SQLException e) {
@@ -63,17 +73,26 @@ public class CadastroBDTeste {
         }
         
         try {
+            System.out.println("---------------------------------");
             System.out.println("Pessoa Juridica incluida com ID: " + pjDao.incluir(pj));
+            System.out.println("---------------------------------");
+            pj.exibir();
             pj.setCidade("Belo Horizonte");
             pj.setEstado("MG");
             pjDao.alterar(pj);
+            System.out.println("---------------------------------");
+            System.out.println("Pessoa Juridica alterada.");
             ArrayList<PessoaJuridica> listaPj = pjDao.getPessoas();
+            System.out.println("---------------------------------");
+            System.out.println("Exibir todas as pessoas juridicas:");
             for (PessoaJuridica pessoa : listaPj) {
                 System.out.println("---------------------------------");
                 pessoa.exibir();
             }
             System.out.println("---------------------------------");
             pjDao.excluir(pj);
+            System.out.println("---------------------------------");
+            System.out.println("Pessoa Juridica excluida.");
             pjDao.close();
         }
         catch (SQLException e) {

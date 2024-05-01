@@ -59,12 +59,12 @@ public class CadastroBD {
     }
     
     public void run() {
-        String opcao = "";
-        while (!opcao.equals("0")) {
+        int opcao = -1;
+        while (opcao != 0) {
             printMenu();
-            opcao = strAnswerQuestion("ESCOLHA: ");
+            opcao = intAnswerQuestion("ESCOLHA: ");
             switch (opcao) {
-                case "1": {
+                case 1: {
                     System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
                     String escolhaIncluir = strAnswerQuestion("TIPO DE PESSOA: ").toUpperCase();
                     if (escolhaIncluir.equals("F")) {
@@ -101,7 +101,7 @@ public class CadastroBD {
                         System.out.println("Erro: Escolha Invalida!");
                     }
                 }; break;
-                case "2": {
+                case 2: {
                     System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
                     String escolhaAlterar = strAnswerQuestion("TIPO DE PESSOA: ").toUpperCase();
                     if (escolhaAlterar.equals("F")) {
@@ -153,7 +153,7 @@ public class CadastroBD {
                         System.out.println("Erro: Escolha Invalida!");
                     }
                 }; break;
-                case "3": {
+                case 3: {
                     System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
                     String escolhaExcluir = strAnswerQuestion("TIPO DE PESSOA: ").toUpperCase();
                     if (escolhaExcluir.equals("F")) {
@@ -192,7 +192,7 @@ public class CadastroBD {
                         System.out.println("Erro: Escolha Invalida!");
                     }
                 }; break;
-                case "4": {
+                case 4: {
                     System.out.println("F - Pessoa Fisica | J - Pessoa Juridica");
                     String escolhaExibir = strAnswerQuestion("TIPO DE PESSOA: ").toUpperCase();
                     if (escolhaExibir.equals("F")) {
@@ -223,7 +223,7 @@ public class CadastroBD {
                         System.out.println("Erro: Escolha Invalida!");
                     }
                 }; break;
-                case "5": {
+                case 5: {
                     try {
                         ArrayList<PessoaFisica> listaPf = pfDao.getPessoas();
                         for (PessoaFisica pessoa : listaPf) {

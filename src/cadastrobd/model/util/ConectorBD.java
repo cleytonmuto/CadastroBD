@@ -33,8 +33,8 @@ public class ConectorBD {
     
     
     public Connection getConnection() throws SQLException {
-        String URL = "jdbc:sqlserver://" + HOSTNAME + ":1433;databaseName=" +
-            DBNAME + ";encrypt=true;trustServerCertificate=true";
+        String URL = String.format("jdbc:sqlserver://%s:1433;databaseName=%s;",
+         HOSTNAME, DBNAME).concat("encrypt=true;trustServerCertificate=true");
         con = DriverManager.getConnection(URL, LOGIN, PASSWORD);
         return con;
     }
